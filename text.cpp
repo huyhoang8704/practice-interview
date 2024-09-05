@@ -43,6 +43,15 @@ void sortStable(){
     });
     for(auto x : a) cout << x.first << " " << x.second << endl;
 }
+// Đếm tần suất xuất hiện các phần tử
+void dem(){
+    map<int, int> mp;
+    int n; cin >>n;
+    for(int i = 1 ; i<=n;i++) {
+        int x ; cin >>x;
+        mp[x]++;
+    }
+}
 
 
 int main(){
@@ -50,6 +59,6 @@ int main(){
     freopen("input.txt","r",stdin);
     freopen("output.txt","w",stdout);
     #endif
-    sortStable();
+    multimap<int, int> mp;
     return 0;
 }
