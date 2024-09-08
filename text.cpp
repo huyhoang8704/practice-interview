@@ -37,7 +37,7 @@ void sortStable(){
         cin >>a[i].first;
         a[i].second = i;
     }
-    sort(a , a+n , [](pair<int, int> a, pair<int, int> b){
+    sort(a , a+n , [](pair<int, int> a, pair<int, int> b) -> bool {
         if(a.first != b.first) return a.first < b.first;
         return a.second < b.second;
     });
