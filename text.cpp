@@ -53,12 +53,20 @@ void dem(){
     }
 }
 
+//? lower_bound(a,a+n,x) trả về iterator đến vị trí phần tử đầu tiên >= x
+//? upper_bound(a,a+n,x) trả về iterator đến vị trí phần tử đầu tiên > x
+// 1 2 3 4 4 5 6 
+// lower_bound(a,a+n,4) = 3
 
 int main(){
     #ifndef ONLINE_JUDGE;
     freopen("input.txt","r",stdin);
     freopen("output.txt","w",stdout);
     #endif
-    multimap<int, int> mp;
+    int x; cin >>x;
+    int a[x];
+    for(int &x : a) cin >> x;
+    auto it = lower_bound(a,a+x,4);
+    cout << distance(a , it) << endl;
     return 0;
 }
