@@ -57,16 +57,40 @@ void dem(){
 //? upper_bound(a,a+n,x) trả về iterator đến vị trí phần tử đầu tiên > x
 // 1 2 3 4 4 5 6 
 // lower_bound(a,a+n,4) = 3
+//
+
+// https://www.youtube.com/watch?v=H9UEBg5jy3k&list=PL95oJNCBbtQS5jIvd6a9MDiIexv5cA9Pm&index=16
+//! Nhà gần nhất
+void solution1(){
+    int n; cin >> n;
+    int a[n];
+    for(int &x : a) cin >>x;
+    sort(a,a+n);
+    int res = 10000000;
+    for(int i= 0 ;i<n-1;i++){
+        res = min(res , a[i+1] - a[i]);
+    }
+    cout << "Khoang cach nho nhat la: " << res << endl;
+}
+//! Xếp gạch
+void solution(){
+    int n; cin >> n;
+    int a[n];
+    for(int &x : a) cin >>x;
+    int maxArr = *max_element(a,a+n);
+    if (maxArr == 0) cout << 1;
+    else if(maxArr >= n) cout << n;
+    else cout << maxArr;
+}
+//! Vắt sữa bò
+
+
 
 int main(){
     #ifndef ONLINE_JUDGE;
     freopen("input.txt","r",stdin);
     freopen("output.txt","w",stdout);
     #endif
-    int x; cin >>x;
-    int a[x];
-    for(int &x : a) cin >> x;
-    auto it = lower_bound(a,a+x,4);
-    cout << distance(a , it) << endl;
+    solution();
     return 0;
 }
