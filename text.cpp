@@ -73,17 +73,69 @@ void solution1(){
     cout << "Khoang cach nho nhat la: " << res << endl;
 }
 //! Xếp gạch
-void solution(){
+void solution2(){
     int n; cin >> n;
     int a[n];
     for(int &x : a) cin >>x;
     int maxArr = *max_element(a,a+n);
     if (maxArr == 0) cout << 1;
     else if(maxArr >= n) cout << n;
-    else cout << maxArr;
+    else cout << maxArr + 1;
 }
-//! Vắt sữa bò
-
+//! Xắp xếp thời gian diễn
+void solution3(){
+    int n; cin >>n;
+    pair<int,int> a[n];
+    for(int i=0 ; i <n;i++) cin >> a[i].first >> a[i].second;
+    sort(a,a+n, [](pair<int,int> a , pair<int,int> b) -> bool {
+        return a.second < b.second;
+    });
+    int res = 1;
+    int end_time = a[0].second;
+    for(int i= 1 ; i<n ; i++) {
+        if(a[i].first > end_time) {
+            res++;
+            end_time = a[i].second;
+        }
+    }
+    cout << res;
+}
+//! Bài 21 : In khuôn theo dạng, theo thứ tự lớn nhất , nhỏ nhất m lớn t2 , nhỏ t2
+void solution21(){
+    int n; cin >>n;
+    int a[n];
+    for(int &x : a) cin >>x;
+    sort(a,a+n , greater<int>());
+    int i = 0 , j =n-1;
+    queue<int> result;
+    while(i < j) {
+        result.push(a[i]); i++;
+        result.push(a[j]); j--;
+    }
+    if( i == j) result.push(a[i]); // Trường hợp n lẻ thì left = right thêm 1 thằng vào thôi
+    while(!result.empty()) {
+        cout << result.front() << " ";
+        result.pop();
+    }
+}
+//! Bài 23 : Đếm số lượng cặp có tổng bằng k
+//* Ý tưởng tìm vị trí phần tử cần tìm đầu tiên và cuối cùng trong mảng (nlogn)
+void solution(){
+    int n, k; cin >>n >> k;
+    int a[n];
+    for(int &x : a) cin >>x;
+    sort(a,a+n);
+    int res = 0;
+    for(int i= 0 ; i< n-1;i++){
+        auto it1 = lower_bound(a+i+1, a+n, k-a[i]); // >= k-a[i]
+        auto it2 = upper_bound(a+i+1, a+n, k-a[i]); // > k-a[i]
+        // Nếu có tìm thấy
+        if(*it1 == k-a[i]) {
+            res += it2 - it1;
+        }
+    }
+    cout << res;
+}
 
 
 int main(){
