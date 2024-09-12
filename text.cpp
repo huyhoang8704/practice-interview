@@ -120,7 +120,7 @@ void solution21(){
 }
 //! Bài 23 : Đếm số lượng cặp có tổng bằng k
 //* Ý tưởng tìm vị trí phần tử cần tìm đầu tiên và cuối cùng trong mảng (nlogn)
-void solution(){
+void solution23(){
     int n, k; cin >>n >> k;
     int a[n];
     for(int &x : a) cin >>x;
@@ -135,6 +135,22 @@ void solution(){
         }
     }
     cout << res;
+}
+//! Bài 28 : Tìm các số còn thiếu trong 1 Array
+int cnt[1000001];
+void solution(){
+    memset(cnt , 0 , sizeof(cnt));
+    int n; cin >>n;
+    int l=1e9,r=-1e9;
+    for(int i=0; i<n;i++) {
+        int x; cin >>x;
+        l = min(l,x);
+        r = max(r,x);
+        cnt[x] = 1;
+    }
+    vector<int> v;
+    for(int i=l ; i <= r;i++) if(!cnt[i]) v.push_back(i);
+    for(auto x : v) cout << x << " ";
 }
 
 
