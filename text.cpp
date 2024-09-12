@@ -138,7 +138,7 @@ void solution23(){
 }
 //! Bài 28 : Tìm các số còn thiếu trong 1 Array
 int cnt[1000001];
-void solution(){
+void solution28(){
     memset(cnt , 0 , sizeof(cnt));
     int n; cin >>n;
     int l=1e9,r=-1e9;
@@ -152,7 +152,30 @@ void solution(){
     for(int i=l ; i <= r;i++) if(!cnt[i]) v.push_back(i);
     for(auto x : v) cout << x << " ";
 }
-
+//! Bài 32 : Sắp xếp tần suất 
+void solution32(){
+    int n; cin >>n;
+    map<int,int> mp;
+    for(int i = 1 ; i<=n;i++) {
+        int x ; cin >>x;
+        mp[x] ++;
+    }
+    vector <pair<int,int>> v;
+    for(auto it : mp) v.push_back(it);
+    sort(v.begin(), v.end(), [](pair<int,int> a, pair<int,int> b) -> bool {
+        if(a.second == b.second) return a.first < b.first;
+        return a.second < b.second;
+    });
+    for(auto x : v) cout << x.first << " " << x.second << endl;
+    /*
+    6 1
+    4 2
+    5 2
+    */
+}
+void solution(){
+    
+}
 
 int main(){
     #ifndef ONLINE_JUDGE;
