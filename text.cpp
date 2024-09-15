@@ -173,9 +173,56 @@ void solution32(){
     5 2
     */
 }
-void solution(){
-    
+//! Bài 38 : Vị khách đến tại thời điểm 'first' và cần 'second' thời gian để check in xong
+/*
+2 1
+5 7          -> output = 15 ( 2 + 1 = 3 , 5 + 7 = 12 , 12 + 3 = 15 )
+8 3
+*/
+void solution38(){
+    int n; cin >>n;
+    pair<int,int> a[n];
+    for(int i=0 ;i<n;i++) cin >>a[i].first >>a[i].second;
+    sort(a , a+n);
+    int end_time = -1e9;
+    for(int i = 0 ; i< n ; i++) {
+        end_time = max(end_time , a[i].first);  // chọn thời điểm bắt đầu
+        end_time += a[i].second;   // tổng số thời gian khi a[i] check-in xong 
+    }
+
 }
+//! Bài 41 : Tìm cặp số nguyên tố có tổng là N
+void solution41(){
+    int target; cin >> target;
+    isPrime();
+    vector<int> a;
+    for(int i = 0 ; i <= 10000000 ;i++) if(nt[i] && i <= target) a.push_back(i);
+    bool check = false;
+    for(auto x : a) {
+        auto r = lower_bound(a.begin() , a.end() , target - x);
+        if(*r == target - x) {
+            check = true;
+            cout << x << " " << *r << endl;
+            break;
+        }
+    }
+    if (!check) cout << "No Solution" << endl;
+}
+//! Bài 42 : Tìm số cặp có hiệu bằng X
+void solution(){
+    int n,target; cin >>n>> target;
+    int a[n];
+    for(int &x : a) cin >>x;
+    sort(a,a+n);
+    for(int i = n -1 ; i > 0; i++ ){
+
+        auto it = lower_bound(a  , a + n , a[i] - target);
+        if( *it == a[i] - target) {
+            cout << a[i] << " " << *it << endl;
+        }
+    }
+}
+
 
 int main(){
     #ifndef ONLINE_JUDGE;
