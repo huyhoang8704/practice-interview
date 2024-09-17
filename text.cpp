@@ -4,31 +4,15 @@ typedef long long ll;
 
 class Solution {
 public:
-    int removeElement(vector<int>& nums, int val) {
-        for (int i = nums.size() - 1; i >= 0; i--) {
-            if (nums[i] == val) {
-                nums.erase(nums.begin() + i);
+    int removeDuplicates(vector<int>& nums) {
+        int j=1;
+        for(int i=1; i< nums.size();i++){
+            if(nums[i] != nums[i-1]){
+                nums[j] = nums[i];
+                j++;
             }
         }
         return nums.size();
-    }
-};
-// Chậm hơn
-
-// Nhanh hơn do kh sài hàm ease
-class SolutionExample {
-public:
-    int removeElement(vector<int>& nums, int val) {
-        int count = 0;
-        for( int i=0; i<nums.size(); i++)
-        {
-            if(nums[i] != val)
-            {
-                nums[count] = nums[i];
-                count ++;
-            }
-        }
-        return count;
     }
 };
 
@@ -39,9 +23,9 @@ int main(){
     freopen("output.txt","w",stdout);
     #endif
 
-    vector<int> nums = {3,2,2,3};
+    vector<int> nums = {1,1,2};
     int val = 3;
     Solution obj;
-    cout << obj.removeElement(nums , val);
+    cout << obj.removeDuplicates(nums);
     return 0;
 }
