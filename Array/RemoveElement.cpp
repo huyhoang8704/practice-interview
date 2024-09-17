@@ -1,3 +1,12 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+
+
+//! LeetCode: 27. Remove Element
+//! https://leetcode.com/problems/remove-element/
+
 class Solution {
 public:
     int removeElement(vector<int>& nums, int val) {
@@ -27,3 +36,13 @@ public:
         return count;
     }
 };
+
+
+int main(){
+    #ifndef ONLINE_JUDGE;
+    freopen("input.txt","r",stdin);
+    freopen("output.txt","w",stdout);
+    #endif
+    return 0;
+}
+
