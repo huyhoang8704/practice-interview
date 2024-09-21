@@ -2,49 +2,27 @@
 using namespace std;
 typedef long long ll;
 
-//! LeetCode 2. Add Two Numbers
-//! https://leetcode.com/problems/add-two-numbers
+//! LeetCode 80. Remove Duplicates from Sorted Array II
+//! https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii
 
- struct ListNode {
-    int val;
-    ListNode *next;
-    ListNode() : val(0), next(nullptr) {}
-    ListNode(int x) : val(x), next(nullptr) {}
-    ListNode(int x, ListNode *next) : val(x), next(next) {}
-};
 class Solution {
 public:
-    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        ListNode* dummyHead = new ListNode(0);
-        ListNode* tail = dummyHead;
-        int carry = 0;
+    int removeDuplicates(vector<int>& nums) {
+        int k = 2;
 
-        while (l1 != nullptr || l2 != nullptr || carry != 0) {
-            int digit1 = (l1 != nullptr) ? l1->val : 0;
-            int digit2 = (l2 != nullptr) ? l2->val : 0;
-
-            int sum = digit1 + digit2 + carry;
-            int digit = sum % 10; // Phần dư
-            carry = sum / 10; // Phần nguyên
-
-            ListNode* newNode = new ListNode(digit);
-            tail->next = newNode;
-            tail = tail->next;
-
-            l1 = (l1 != nullptr) ? l1->next : nullptr;
-            l2 = (l2 != nullptr) ? l2->next : nullptr;
+        if (nums.size() <= 2) return nums.size();
+        
+        // use two pointers, one for current element and another for the previous two element
+        for (int i = 2; i < nums.size(); i++) {
+            if (nums[i] != nums[k - 2]) {
+                nums[k] = nums[i];
+                k++;
+            }
         }
 
-        ListNode* result = dummyHead->next;
-        delete dummyHead;
-        return result;
+        return k;       
     }
 };
-/*
-Input: l1 = [2,4,3], l2 = [5,6,4]
-Output: [7,0,8]
-Explanation: 342 + 465 = 807.
-*/
 
 
 
@@ -54,9 +32,9 @@ int main(){
     freopen("output.txt","w",stdout);
     #endif
 
-    // vector<int> nums = {2,2,1,1,1,2,2};
-    // int val = 3;
-    // Solution obj;
-    // cout << obj.majorityElement(nums);
+    vector<int> nums = {1,1,1,2,2,3};
+    int val = 3;
+    Solution obj;
+    cout << obj.removeDuplicates(nums);
     return 0;
 }
