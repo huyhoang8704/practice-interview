@@ -2,29 +2,30 @@
 using namespace std;
 typedef long long ll;
 
-//! LeetCode 80. Remove Duplicates from Sorted Array II
-//! https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii
+//! LeetCode 189. Rotate Array
+//! https://leetcode.com/problems/rotate-array
 
 class Solution {
 public:
-    int removeDuplicates(vector<int>& nums) {
-        int k = 2;
+    void rotate(vector<int>& nums, int k) {
+        int n = nums.size();
 
-        if (nums.size() <= 2) return nums.size();
-        
-        // use two pointers, one for current element and another for the previous two element
-        for (int i = 2; i < nums.size(); i++) {
-            if (nums[i] != nums[k - 2]) {
-                nums[k] = nums[i];
-                k++;
-            }
-        }
+        k = k % n;
 
-        return k;       
+        reverse(nums.begin(), nums.end());   // 5 4 3 2 1
+        reverse(nums.begin(), nums.begin() + k); // 3 4 5 2 1
+        reverse(nums.begin() + k, nums.end()); // 3 4 5 1 2
     }
 };
 
-
+/**
+ * Input: nums = [1,2,3,4,5,6,7], k = 3
+Output: [5,6,7,1,2,3,4]
+Explanation:
+rotate 1 steps to the right: [7,1,2,3,4,5,6]
+rotate 2 steps to the right: [6,7,1,2,3,4,5]
+rotate 3 steps to the right: [5,6,7,1,2,3,4]
+ */
 
 int main(){
     #ifndef ONLINE_JUDGE;
@@ -32,9 +33,9 @@ int main(){
     freopen("output.txt","w",stdout);
     #endif
 
-    vector<int> nums = {1,1,1,2,2,3};
-    int val = 3;
+    vector<int> nums = {1,2,3,4,5,6,7};
+    int k = 3;
     Solution obj;
-    cout << obj.removeDuplicates(nums);
+    obj.rotate(nums , k);
     return 0;
 }
