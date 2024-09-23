@@ -1,25 +1,24 @@
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
+//! LeetCode 55. Jump Game
+//! https://leetcode.com/problems/jump-game
 
-//! LeetCode 122. Best Time to Buy and Sell Stock II
-//! https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii
-
+// Approach : Move Goal Position
 class Solution {
 public:
-    int maxProfit(vector<int>& prices) {
-        int total = 0;
-        int start = prices[0];
-        for(int i= 1 ; i< prices.size() ; i++) {
-            if(prices[i] >  start) {
-                total += prices[i] - start;
+    bool canJump(vector<int>& nums) {
+        int goal = nums.size() - 1;
+
+        for (int i = nums.size() - 2; i >= 0; i--) {
+            if (i + nums[i] >= goal) {
+                goal = i;
             }
-            start = prices[i];
         }
-        return total;
+
+        return goal == 0; // Nếu index đi được tới = 0 thì true       
     }
 };
-
 
 int main(){
     #ifndef ONLINE_JUDGE;
@@ -27,9 +26,9 @@ int main(){
     freopen("output.txt","w",stdout);
     #endif
 
-    vector<int> nums = {7,1,5,3,6,4};
+    vector<int> nums = {3,2,1,0,4};
     int k = 3;
     Solution obj;
-    cout << obj.maxProfit(nums);
+    cout << obj.canJump(nums);
     return 0;
 }
