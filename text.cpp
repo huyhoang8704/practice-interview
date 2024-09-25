@@ -3,45 +3,38 @@ using namespace std;
 typedef long long ll;
 
 
-
 class Solution {
 public:
-    bool isPalindrome(string s) {
-        int start = 0;
-        int end = s.size() - 1;
-
-        if(s.empty()) return true;
-        while (start <= end) {
-            if(!isalnum(s[start])) {
-                start++;
-                continue;
+    bool isSubsequence(string s, string t) {
+        int i=0 , j= 0;
+        while( i < s.size() && j < t.size()) {
+            if(s[i] == t[j]) {
+                i++;
+                j++;
             }
-            else if (!isalnum(s[end])) {
-                end--;
-                continue;
-            }
-            if(tolower(s[start]) != tolower(s[end])) return false;
             else {
-                start++;
-                end--;
+                j++;
             }
         }
-        return true;
 
+        if (i == s.size()) return true;
+        return false;
     }
 };
+
+
+
 int main(){
     #ifndef ONLINE_JUDGE;
     freopen("input.txt","r",stdin);
     freopen("output.txt","w",stdout);
     #endif
 
-    // vector<int> nums = {3,2,1,0,4};
-    // int k = 3;
-    // Solution obj;
-    // cout << obj.canJump(nums);
-    string s = "A man, a plan, a canal: Panama";
+
+    string s = "axc";
+    string t = "ahbgdc";
     Solution obj;
-    cout << obj.isPalindrome(s);
+    bool ans = obj.isSubsequence(s,t);
+    cout << ans;
     return 0;
 }
