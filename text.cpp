@@ -4,22 +4,22 @@ typedef long long ll;
 
 
 
-
 class Solution {
 public:
-    int maxArea(vector<int>& height) {
-        int l=0 , r = height.size()-1;
-        int res = 0;
-        while (l <= r) {
-            int h = min(height[l] , height[r]);
-            res = max(res , h * (r - l));
-            if (height[l] < height[r]) {
-                l++;
-            } else {
-                r--;
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map<int,int> mp;
+
+        // Build the hash table , fisrt = value , second = index
+        for(int i=0; i<nums.size(); i++) mp[nums[i]] = i;
+        
+        // Check if the complement exists in the hash table and it have to different the current index
+        for(int i = 0 ; i<nums.size(); i++) {
+            int res = target - nums[i];
+            if(mp.count(res) && mp[res] != i) {
+                return {i,mp[res]};
             }
         }
-        return res;
+        return {-1,-1};
     }
 };
 
@@ -30,8 +30,9 @@ int main(){
     freopen("output.txt","w",stdout);
     #endif
 
-   Solution obj;
-   vector<int> height = {1,1};
-   cout << obj.maxArea(height); 
+    Solution obj;
+    vector<int> nums = {2,7,11,15};
+    int target = 9;
+    vector<int> ans = obj.twoSum(nums,target);
     return 0;
 }
