@@ -2,30 +2,26 @@
 using namespace std;
 typedef long long ll;
 
-//! LeetCode 167. Two Sum II - Input array is sorted
-//! https://leetcode.com/problems/two-sum-ii-input-array-is-sorted
+
+
 
 class Solution {
 public:
-    vector<int> twoSum(vector<int>& numbers, int target) {
-        int left = 0;
-        int right = numbers.size() - 1;
-
-        while (left < right) {
-            int total = numbers[left] + numbers[right];
-
-            if (total == target) {
-                return {left + 1, right + 1};
-            } else if (total > target) {
-                right--;
+    int maxArea(vector<int>& height) {
+        int l=0 , r = height.size()-1;
+        int res = 0;
+        while (l <= r) {
+            int h = min(height[l] , height[r]);
+            res = max(res , h * (r - l));
+            if (height[l] < height[r]) {
+                l++;
             } else {
-                left++;
+                r--;
             }
         }
-        return {-1, -1}; // If no solution is found        
+        return res;
     }
 };
-
 
 
 int main(){
@@ -34,11 +30,8 @@ int main(){
     freopen("output.txt","w",stdout);
     #endif
 
-
-    Solution obj;
-    vector<int> nums = {0,0,3,4};
-    int target = 0;
-    vector<int> ans = obj.twoSum(nums,target);
-    cout << ans[0] << " " << ans[1] << endl;
+   Solution obj;
+   vector<int> height = {1,1};
+   cout << obj.maxArea(height); 
     return 0;
 }
