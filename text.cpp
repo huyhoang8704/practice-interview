@@ -6,26 +6,28 @@ typedef long long ll;
 
 class Solution {
 public:
-    bool isIsomorphic(string s, string t) {
-        vector<int> indexS(200, 0); // Stores index of characters in string s
-        vector<int> indexT(200, 0); // Stores index of characters in string t
-        
-        int len = s.length(); // Get the length of both strings
-        
-        if(len != t.length()) { // If the lengths of the two strings are different, they can't be isomorphic
-            return false;
+    bool wordPattern(string pattern, string s) {
+        vector<string> words;
+        stringstream ss(s);
+        string word;
+        while(ss>>word){
+            words.push_back(word);
         }
         
-        for(int i = 0; i < len; i++) { // Iterate through each character of the strings
-            if(indexS[s[i]] != indexT[t[i]]) { // Check if the index of the current character in string s is different from the index of the corresponding character in string t
-                return false; // If different, strings are not isomorphic
-            }
+        if(words.size()!=pattern.size()) return false;
+
+        map<char,int> mp1;
+        map<string,int> mp2;
+        for(auto x : pattern) mp1[x]++;
+        for(auto x : words) mp2[x]++;
+
+        for(int i=0 ; i< pattern.size() ; i++) {
+            char x = pattern[i];
+            string y = words[i];
+            if(mp1[x] != mp2[y]) return false;
             
-            indexS[s[i]] = i + 1; // updating position of current character
-            indexT[t[i]] = i + 1;
         }
-        
-        return true; // If the loop completes without returning false, strings are isomorphic
+        return true;
     }
 };
 
@@ -36,8 +38,8 @@ int main(){
     #endif
 
     Solution obj;
-    string s = "egg";
-    string t = "add";
-    cout << obj.isIsomorphic(s,t);
+    string pattern = "abba";
+    string s = "dog cat cat dog";
+    cout << obj.wordPattern(pattern,s);
     return 0;
 }
