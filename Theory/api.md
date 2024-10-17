@@ -20,5 +20,6 @@
 
         + Resource Identification (Định danh tài nguyên): Các tài nguyên trong RESTful API được xác định bằng các URL hoặc URIs (Uniform Resource Identifiers).
     
+    
 # CI/CD là gì ?
 `https://viblo.asia/p/ci-cd-va-devops-07LKXYXDZV4`
